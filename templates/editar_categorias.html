@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Listado de Salas</title>
+  <style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    button {
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Listado de Salas</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Sala</th>
+        <th>Asientos</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td></td>
+        <td></td>
+        <td>
+            <a href=""
+            >
+              <button>Editar</button>
+            </a>
+
+          <form action="" method="POST" style="display:inline;">
+            <input type="hidden" name="sala" id="sala" value="">
+            <button type="submit">Eliminar</button>
+          </form>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br><br>
+  <a><button>Crear Sala</button></a>
+</body>
+<footer>
+  <br><br>
+  <a href="{{url_for('opciones_administrador')}}">
+    <button>Regresar al menu</button>
+  </a>
+</footer>
+</html>

@@ -1,0 +1,26 @@
+<usuarios>
+<usuario>
+ <rol>administrador</rol>
+ <nombre>Oreld</nombre>
+ <apellido>Ardon</apellido>
+ <telefono>41445281</telefono>
+ <correo>eliotorel10@gmail.com</correo>
+ <contrasena>201901472</contrasena>
+ </usuario>
+  <usuario>
+ <rol>cliente</rol>
+ <nombre>John</nombre>
+ <apellido>Doe</apellido>
+ <telefono>123456789</telefono>
+ <correo>john.doe@example.com</correo>
+ <contrasena>mipassword123</contrasena>
+ </usuario>
+ <usuario>
+ <rol>cliente</rol>
+ <nombre>holy</nombre>
+ <apellido>flags</apellido>
+ <telefono>54125632</telefono>
+ <correo>holi21@gmail.com</correo>
+ <contrasena>holi21</contrasena>
+ </usuario>
+ <usuario><rol>cliente</rol><nombre>Steven</nombre><apellido>Sanchez</apellido><telefono>15263524</telefono><correo>steven25@gmail.com</correo><contrasena>steven2525</contrasena></usuario><usuario><rol>administrador</rol><nombre>Oreld</nombre><apellido>Ardon</apellido><telefono>15426352</telefono><correo>ardon25@gmail.com</correo><contrasena>ardon2524</contrasena></usuario></usuarios>

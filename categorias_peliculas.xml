@@ -1,0 +1,66 @@
+<categorias>
+ <categoria>
+ <nombre>Accion</nombre>
+ <peliculas>
+ <pelicula>
+ <titulo> Avengers: Endgame</titulo>
+ <director>Anthony Russo, Joe Russo</director>
+ <anio>2019</anio>
+ <fecha>2023-06-02</fecha>
+ <hora>18:30</hora>
+<imagen>https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/DB176BD1488D7E4822256EF1778C124FC17388FC1E7F0F6D89B38AFF5FB001F6/scale?width=1200&amp;aspectRatio=1.78&amp;format=jpeg</imagen>
+ <precio>40</precio>
+ </pelicula>
+ <pelicula>
+ <titulo>John Wick</titulo>
+ <director>Chad Stahelski</director>
+ <anio>2014</anio>
+ <fecha>2023-06-06</fecha>
+ <hora>20:00</hora>
+<imagen> https://images3.alphacoders.com/103/thumb-1920-1033561.jpg </imagen>
+ <precio>45</precio>
+ </pelicula>
+ <pelicula>
+ <titulo>Mision Imposible: Fallout</titulo>
+ <director>Christopher McQuarrie</director>
+ <anio>2018</anio>
+ <fecha>2023-06-07</fecha>
+ <hora>19:15</hora>
+<imagen> https://garutplus.co.id/wp-content/uploads/2021/02/1_vkKPtzPYAysiyW2PQ_5zmQ-696x392.jpeg </imagen>
+ <precio>55</precio>
+ </pelicula>
+</peliculas>
+ </categoria>
+ <categoria>
+ <nombre>Comedia</nombre>
+ <peliculas>
+ <pelicula>
+ <titulo>Deadpool</titulo>
+ <director>Tim Miller</director>
+ <anio>2016</anio>
+ <fecha>2023-06-05</fecha>
+ <hora>20:30</hora>
+<imagen> https://wallpapercave.com/wp/wp5116401.jpg </imagen>
+ <precio>65</precio>
+ </pelicula>
+ <pelicula>
+ <titulo>Superbad</titulo>
+ <director>Greg Mottola</director>
+ <anio>2007</anio>
+ <fecha>2023-06-06</fecha>
+ <hora>21:00</hora>
+ <imagen> https://images7.alphacoders.com/118/1180548.jpg </imagen>
+ <precio>45</precio>
+ </pelicula>
+ <pelicula>
+ <titulo>Bridesmaids</titulo>
+ <director>Paul Feig</director>
+ <anio>2011</anio>
+ <fecha>2023-06-07</fecha>
+ <hora>20:15</hora>
+<imagen> https://c4.wallpaperflare.com/wallpaper/61/848/843/movie-bridesmaids-wallpaper-preview.jpg </imagen>
+ <precio>42</precio>
+ </pelicula>
+ </peliculas>
+ </categoria>
+</categorias>

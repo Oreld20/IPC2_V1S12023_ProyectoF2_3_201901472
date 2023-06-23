@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Menú de Opciones</title>
+  <link rel="stylesheet" type="text/css" href="ruta_a/slick.css"/>
+  <style>
+    
+
+    * {
+      margin: 0;
+      padding: 0;
+      font-family: lato;
+  }
+  
+  h2 {
+      text-align: center;
+      font-size: 2rem;
+      padding-top: 50px;
+  }
+  
+  .slider-frame {
+    width: 1535px;
+      height: auto;
+    margin:0px auto 0;
+    overflow: hidden;
+  }
+  
+  .slider-frame ul {
+    display: flex;
+    padding: 0;
+    width: 400%;
+    
+    animation: slide 20s infinite alternate ease-in-out;
+  }
+  
+  .slider-frame li {
+    width: 100%;
+    list-style: none;
+  }
+  
+  .slider-frame img {
+    width: 100%;
+  }
+  
+  @keyframes slide {
+    0% {margin-left: 0;}
+    20% {margin-left: 0;}
+    
+    25% {margin-left: -100%;}
+    45% {margin-left: -100%;}
+    
+    50% {margin-left: -200%;}
+    70% {margin-left: -200%;}
+    
+    75% {margin-left: -300%;}
+    100% {margin-left: -300%;}
+  }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #f2f2f2;
+      padding: 20px;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+    }
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+    }
+    nav ul li a:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Menú de Opciones</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="{{url_for('login')}}">Iniciar sesión</a></li>
+      <li><a href="{{url_for('registro')}}">Registrar Usuario</a></li>
+      <li><a href="{{url_for('peliculas')}}">Ver listado de peliculas</a></li>
+    </ul>
+  </nav>
+  <div class="slider-frame">
+    <ul>
+      {%for elemento in lista_P%}
+        <li><img src="{{elemento.imagen}}" alt="estreno"></li>
+      {%endfor%}
+
+    </ul>
+</div>
+
+  
+
+</body>
+</html>
