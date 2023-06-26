@@ -7,6 +7,16 @@
     body {
       font-family: Arial, sans-serif;
     }
+
+    .footer button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 9%;
+    }
     
     .container {
       width: 300px;
@@ -60,12 +70,14 @@
         <button onclick="selectOption(3)">Ver listado de Peliculas favoritas</button>
       </li>
       <li>
-        <button onclick="selectOption(4)">Ver historial de voletos comprados</button>
+        <a href="{{url_for('historial_voletos')}}">
+          <button>Historial de voletos comprados</button>
+        </a>
       </li>
     </ul>
   </div>
 </body>
-<footer>
+<footer class="footer">
   <a href="{{url_for('login')}}">
     <button>Regresar</button>
   </a>

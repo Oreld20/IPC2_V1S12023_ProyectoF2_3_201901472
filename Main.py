@@ -9,8 +9,12 @@ lista_clientes = ListaEnlazada()
 lista_salas = ListaDoblementeEnlazada()
 lista_Peliculas = ListaDoblementeEnlazadaCircular()
 lista_Peliculas.CargarXML_Categorias()
+lista_salas.CargarXML_salas(1)
 objeto = Clientes("administrador","Oreld", "Ardon", "41445281", "eliotorel10@gmail.com", "201901472")
 lista_clientes.add(objeto)
+contador=1
+voletos_comprados=[]
+
 
 
 app = Flask(__name__)
@@ -216,6 +220,48 @@ def editar_categorias():
 
 @app.route('/comprar_voletos', methods = ['POST','GET'])
 def comprar_voletos():
-    return render_template('Compra_Voletos.html')
+    if request.method=='POST':
+        titulo = request.form['titulo']
+        sala = request.form['sala']
+        voletos = request.form['voletos']
+        total = lista_Peliculas.buscar_elemento(titulo)
+        columnas = lista_salas.buscar_elemento(sala)
+        asientos = int(columnas.asientos)/int(10)
+        print(str(asientos))
+        print(titulo)
+        print(sala)
+        print(voletos)
+        print(total.dato.precio)
+        precio = int(voletos)*int(total.dato.precio)
+        
+        return render_template('Terminacion_Voletos.html', titulo=titulo, sala=sala, voletos=voletos, precio=precio, asientos=asientos)
+
+
+    return render_template('Compra_Voletos.html' ,lista_P=lista_Peliculas, lista_s = lista_salas)
+
+@app.route('/terminacion_voletos', methods=['POST','GET'])
+def terminacion_voletos():
+    if request.method=='POST':
+        titulo = request.form['titulo']
+        voletos = request.form['voletos']
+        sala = request.form['sala']
+        precio = request.form['precio']
+        nombre = request.form['nombre']
+        nit = request.form['nit']
+        direccion = request.form['direccion']
+        datos = request.form['datos']
+        asientos = request.form['asientos']
+        numero_boleto = f"#USACIPC2_201901472_{contador}"
+        objeto = (f"Titulo: {titulo},  Sala: {sala},  No voletos: {voletos},  Monto total: {precio},  Nombre: {nombre},  Nit:  {nit},  Direccion: {direccion},  Datos: {datos},  Aseintos:  {asientos},  No voleto: {numero_boleto}")
+        voletos_comprados.append(objeto)
+        
+        return render_template('historial_voletos.html', historial= voletos_comprados)        
+
+
+    return render_template('Terminacion_Voletos.html')
+
+@app.route('/historial_voletos', methods=['POST','GET'])
+def historial_voletos():
+    return render_template('historial_voletos.html', historial= voletos_comprados)
 
     

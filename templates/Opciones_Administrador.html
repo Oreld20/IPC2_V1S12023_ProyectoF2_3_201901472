@@ -7,6 +7,16 @@
     body {
       font-family: Arial, sans-serif;
     }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 10%;
+    }
     
     .container {
       width: 300px;
@@ -80,6 +90,7 @@
 <p style="border: black;">{{mensaje}}</p>
 {%endif%}
 <footer>
+  <br><br>
   <a href="{{url_for('login')}}">
     <button>Regresar al login</button>
   </a>

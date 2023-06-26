@@ -2,9 +2,11 @@ from nodo import Nodo
 from clientes import Clientes
 import xml.etree.ElementTree as ET
 
+
 class ListaEnlazada:
     def __init__(self):
         self.cabeza = None
+        
 
     def add(self, dato):
         nuevo = Nodo(dato)
@@ -156,6 +158,18 @@ class ListaEnlazada:
         # Guardar los cambios en el archivo XML
         tree.write(r'C:\Users\eliot\OneDrive\Documentos\MyEspacio_De_Trabajo\proyecto-ipc2\usuario.XML')
         self.CargarXML(1)
+
+    def getNodo_nombre(self, nombre):
+        if self is None:
+            print("La lista está vacía")
+        else:
+            actual = self.cabeza
+            while actual:
+                if actual.dato.nombre == nombre:
+                  print("cierto")
+                  return actual.dato
+                actual = actual.siguiente
+        print("mentira")
 
 
     
