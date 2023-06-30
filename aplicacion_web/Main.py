@@ -508,16 +508,11 @@ def edicion_tarjetas():
 
 @app.route('/tu-endpoint', methods=['GET'])
 def tu_funcion():
-    # Realizar la solicitud a la API
     response = requests.get('https://api.example.com/data')
-    # Verificar el código de respuesta
     if response.status_code == 200:
-        # Extraer los datos JSON de la respuesta
         json_data = response.json()
-        # Devolver una respuesta JSON utilizando jsonify de Flask
         return jsonify(json_data)
     else:
-        # Si la solicitud no fue exitosa, devolver un mensaje de error
         return jsonify({'mensaje': 'Error al obtener los datos de la API'})
     
 @app.route('/cancelar_voletos', methods=['POST','GET'])
