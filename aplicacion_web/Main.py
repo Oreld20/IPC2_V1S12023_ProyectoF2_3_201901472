@@ -317,7 +317,12 @@ def nueva_pelicula():
 
 @app.route('/editar_categorias', methods = ['POST','GET'])
 def editar_categorias():
-    return render_template('editar_categorias.html')
+    if request.method=='POST':
+        print("se estan recibiendo datos")
+    
+    lista_p=retorno_categorias()
+
+    return render_template('editar_categorias.html', lista_p =lista_p)
 
 @app.route('/comprar_voletos', methods = ['POST','GET'])
 def comprar_voletos():
@@ -537,6 +542,17 @@ def eliminar_boleto_por_No_voleto(No_voleto, lista_boleto):
             return True
 
     return False 
+
+def retorno_categorias():
+    print("Metodo para obtener solo las categorias")
+    peliculas = lista_Peliculas
+    categorias_unicas = set()
+    for pelicula in peliculas:
+        categorias_unicas.add(pelicula.categoria)
+
+    for categoria in categorias_unicas:
+        print(categoria)
+        return editar_categorias
 
     
 

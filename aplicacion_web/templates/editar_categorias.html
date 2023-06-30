@@ -87,36 +87,41 @@
 </head>
 <body>
   <div class="container">
-    <h2>Editar Categorias</h2>
+    <h2>Listado de Peliculas</h2>
     <table>
-      <thead>
+      <tr>
+        <th>Genero</th>
+        <th>Titulo</th>
+        <th>Director</th>
+        <th>Año</th>
+        <th>Fecha</th>
+        <th>Imagen</th>
+        <th>Precio</th>
+        <th></th>
+      </tr>
+      {%if lista_P is not none%}
+        {%for elemento in lista_P%}
         <tr>
-          <th>Sala</th>
-          <th>Asientos</th>
-          <th>Opciones</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-          <td></td>
-          <td></td>
+          <td>{{elemento}}</td>
           <td>
-              <a href=""
-              >
+              <a href="{{ url_for('Edicion_Peliculas' , categoria=elemento)}}">
                 <button>Editar</button>
               </a>
-  
-            <form action="" method="POST" style="display:inline;">
-              <input type="hidden" name="sala" id="sala" value="">
+            <form action="/editar_peliculas" method="POST" style="display:inline;">
+              <input type="hidden" name="categoria" id="categoria" value="{{elemento}}">
               <button type="submit">Eliminar</button>
             </form>
-  
           </td>
-        </tr>
-      </tbody>
+        {%endfor%}
+      {%endif%}
+      </tr>
     </table>
-    <br><br>
-    <a><button>Crear categoria</button></a>
+    <br>
+    
+    <a href="{{url_for('nueva_pelicula')}}">
+      <button>Crear nueva pelicula</button>
+    </a>
+    <br><br><br>
   </div>
 </body>
 <footer class="footer">
