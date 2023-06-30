@@ -1,0 +1,6 @@
+
+aplicacion_web/.venv/
+
+aplicacion_web/__pycache__/
+
+api_rest/.venv/
