@@ -26,8 +26,27 @@ lista_salas_json= ListaDoblementeEnlazada()
 lista_peliculas_json = ListaDoblementeEnlazadaCircular()
 lista_tarjetas_json= ListaDoblementeEnlazada_tarjetas()
 lista_boletos = []
-
+categorias_existentes=[]
 contador_global = 0
+
+
+def retornar_lista():
+    global categorias_existentes
+    return categorias_existentes
+
+def eliminar_elemento(elemento):
+    global categorias_existentes
+    if elemento in categorias_existentes:
+        categorias_existentes.remove(elemento)
+
+def reemplazar_elemento(elemento_buscar, elemento_reemplazo):
+    global categorias_existentes
+    if elemento_buscar in categorias_existentes:
+        indice = categorias_existentes.index(elemento_buscar)
+        categorias_existentes[indice] = elemento_reemplazo
+def vaciar_lista():
+    global categorias_existentes
+    categorias_existentes.clear()
 
 def incrementar_contador():
     global contador_global
@@ -105,7 +124,9 @@ def opciones_administrador():
     if request.method == 'POST':
         opcion = request.form['boton']
         if opcion == "Cargar_los_XML":
-            try:
+           
+            
+                vaciar_lista()
                 lista_clientes.CargarXML(1)
                 lista_Peliculas.CargarXML_Categorias()
                 lista_salas.CargarXML_salas(1)
@@ -114,10 +135,12 @@ def opciones_administrador():
                 lista_salas_json.reiniciar()
                 lista_peliculas_json.reiniciar()
                 lista_tarjetas_json.reiniciar()
+                retornar_lista().extend(lista_Peliculas.obtener_categorias())
+                
 
                 response = requests.get('http://localhost:5700/json_usuarios')
                 clientes_api = response.json()
-                objeto_json = json.loads(clientes_api)
+                objeto_json = clientes_api
                 usuarios = objeto_json["usuarios"]["usuario"]
                 for usuario in usuarios:
                     rol = usuario["rol"]
@@ -132,7 +155,7 @@ def opciones_administrador():
 
                 response = requests.get('http://localhost:5700/json_salas')
                 salas_api = response.json()
-                salas_json = json.loads(salas_api)
+                salas_json = salas_api
                 json_salas = salas_json["cines"]["cine"]["salas"]["sala"]
                 for sala_json in json_salas:
                     sala = sala_json["numero"]
@@ -143,7 +166,7 @@ def opciones_administrador():
                 
                 response = requests.get('http://localhost:5700/categorias_peliculas')
                 peliculas_api = response.json()
-                peliculas_json = json.loads(peliculas_api)
+                peliculas_json = peliculas_api
                 categorias_json = peliculas_json["categorias"]["categoria"]
                 for categoria_json in categorias_json:
                     categoria = categoria_json["nombre"]
@@ -161,7 +184,7 @@ def opciones_administrador():
 
                 response = requests.get('http://localhost:5700/json_tarjetas')
                 tarjetas_api = response.json()
-                tarjetas_jsonn = json.loads(tarjetas_api)
+                tarjetas_jsonn = tarjetas_api
                 tarjetas_json = tarjetas_jsonn["tarjetas"]["tarjeta"]
                 for tarjeta_json in tarjetas_json:
                     tipo = tarjeta_json["tipo"]
@@ -173,8 +196,7 @@ def opciones_administrador():
 
                 mensaje = "XML's Cargados con exito"
                 return render_template('Opciones_Administrador.html',mensaje = mensaje)
-            except Exception as e:
-                print(e)
+        
     return render_template('Opciones_Administrador.html')
 
 
@@ -191,7 +213,6 @@ def editar_clientes():
 @app.route('/edicion_clientes', methods=['POST','GET'])
 def edicion_clientes():
     correo = request.args.get('correo')
-    print(correo)
     if request.method=='POST':
         viejo_email = request.form['viejo']
         rol =request.form['rol']
@@ -203,7 +224,6 @@ def edicion_clientes():
         lista_clientes.editar_usuario(viejo_email, rol, nombre, apellido, telefono, email, password)
         lista_clientes.CargarXML(1)
         return render_template('Editar_Clientes.html', lista_c = lista_clientes , lista_cj=lista_clientes_json)
-
     return render_template('Edicion_Clientes.html', lista_c = lista_clientes,correo=correo)
 
 @app.route('/nuevo_cliente', methods = ['POST','GET'])
@@ -232,7 +252,6 @@ def editar_sala():
 @app.route('/edicion_salas', methods = ['POST','GET'])
 def edicion_salas():
     sala = request.args.get('sala')
-    print(sala)
     if request.method=='POST':
         numero = request.form['numero']
         lugar = request.form['sala']
@@ -240,7 +259,6 @@ def edicion_salas():
         lista_salas.editar_sala(numero, lugar, asientos)
         lista_salas.CargarXML_salas(1)
         return render_template('editar_salas.html', lista_s = lista_salas, lista_sj=lista_salas_json)
-
     return render_template('Edicion_Salas.html', lista_s = lista_salas, sala=sala)
 
 @app.route('/nueva_sala', methods = ['POST','GET'])
@@ -248,12 +266,9 @@ def nueva_sala():
     if request.method=='POST':
         numero = request.form['numero']
         asientos = request.form['asientos']
-        print(numero)
-        print(asientos)
         lista_salas.crear_nueva_sala(numero, asientos)
         lista_salas.CargarXML_salas(1)
         return render_template('editar_salas.html', lista_s = lista_salas, lista_sj=lista_salas_json)
-
     return render_template('nueva_sala.html')
 
 @app.route('/listadopeliculas_cliente', methods = ['POST','GET'])
@@ -262,13 +277,10 @@ def listadopeliculas_cliente():
     if request.method=='POST':
         name = request.form['nombre']
         favorito = request.form['favorito']
-        print(favorito)
-        print(name)
         pelicula=lista_Peliculas.buscar_elemento(favorito).dato
         lista_clientes.asociar_lista_circular(name, pelicula)
         lista_clientes.recorrer_lista_circular(name)
         return render_template('listadopeliculas_cliente.html',lista_P=lista_Peliculas, nombre=name)
-        
     return render_template('listadopeliculas_cliente.html',lista_P=lista_Peliculas, nombre=nombre)
 
 @app.route('/editar_peliculas', methods = ['POST','GET'])
@@ -317,7 +329,35 @@ def nueva_pelicula():
 
 @app.route('/editar_categorias', methods = ['POST','GET'])
 def editar_categorias():
-    return render_template('editar_categorias.html')
+    if request.method=='POST':
+        categoria = request.form['categoria']
+        lista_Peliculas.eliminar_categoria_xml(categoria)
+        eliminar_elemento(categoria)
+        return render_template('editar_categorias.html', lista_p =categorias_existentes)
+    return render_template('editar_categorias.html', lista_p =categorias_existentes)
+
+
+@app.route('/edicion_categorias', methods = ['POST','GET'])
+def edicion_categorias():
+    categoria = request.args.get('categoria')
+    print(categoria)
+    if request.method=='POST':
+        categoria_new = request.form['categoria_new']
+        categoria_old = request.form['categoria_old']
+        lista_Peliculas.editar_categoria_xml(categoria_old,categoria_new)
+        reemplazar_elemento(categoria_old, categoria_new)
+        return render_template('editar_categorias.html', lista_p =categorias_existentes)
+    
+    return render_template('Edicion_Categorias.html',lista_p =categorias_existentes, categoria = categoria)
+
+@app.route('/nueva_categoria', methods = ['POST','GET'])
+def nueva_categoria():
+    if request.method=='POST':
+        categoria = request.form['categoria']
+        lista_Peliculas.agregar_categoria_xml(categoria)
+        retornar_lista().append(categoria)
+        return render_template('editar_categorias.html', lista_p =categorias_existentes)
+    return render_template('nueva_categoria.html')
 
 @app.route('/comprar_voletos', methods = ['POST','GET'])
 def comprar_voletos():
@@ -397,18 +437,12 @@ def terminacion_voletos():
                 mensaje = "Alguno de los asientos ya esta ocupado"
                 return render_template('Terminacion_Voletos.html', titulo=titulo, sala=sala, voletos=voletos, precio=precio, asientos=lugares, nombre=name, mensaje=mensaje)
                         
-                       
-
-       
-        
     return render_template('Terminacion_Voletos.html', nombre = nombre)
 
 @app.route('/historial_voletos', methods=['POST','GET'])
 def historial_voletos():
     nombre = request.args.get('nombre')
     lista_p=lista_clientes.recorrer_lista_nativa(nombre)
-    print(lista_p)
-
     return render_template('historial_voletos.html', lista_p=lista_p, nombre=nombre)
 
 @app.route('/peliculas_favoritas', methods=['POST','GET'])
@@ -424,12 +458,9 @@ def peliculas_favoritas():
 def editar_tarjetas():
     if request.method=='POST':
         titular = request.form['titular']
-        print(titular)
         lista_tarjetas.eliminar_tarjetas_por_titular(titular)
         lista_tarjetas.cargar_desde_xml()
         return render_template('editar_tarjetas.html', lista_t=lista_tarjetas, lista_tj=lista_tarjetas_json)
-        
-
     return render_template('editar_tarjetas.html', lista_t=lista_tarjetas, lista_tj=lista_tarjetas_json)
 
 
@@ -538,7 +569,6 @@ def eliminar_boleto_por_No_voleto(No_voleto, lista_boleto):
 
     return False 
 
-    
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -349,6 +349,21 @@ class ListaDoblementeEnlazadaCircular:
                     print("El cliente no tiene una lista doblemente enlazada circular asociada.")
                 break
             nodo_actual = nodo_actual.siguiente
+
+
+    def obtener_categorias(self):
+        categorias = []
+
+        # Parsear el archivo XML
+        tree = ET.parse(r'C:\Users\eliot\OneDrive\Documentos\MyEspacio_De_Trabajo\proyecto-ipc2\aplicacion_web\categorias_peliculas.XML')
+        root = tree.getroot()
+
+        # Encontrar todas las etiquetas <nombre> dentro de <categoria>
+        for categoria in root.findall('categoria'):
+            nombre = categoria.find('nombre').text
+            categorias.append(nombre)
+
+        return categorias
     
             
         

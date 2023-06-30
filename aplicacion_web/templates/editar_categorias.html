@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Listado de Peliculas</title>
+  <title>Editar generos</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
     }
     
     .container {
-      width: 1200px;
+      width: 1300px;
       margin: 0 auto;
       padding: 20px;
       border: 1px solid #ccc;
@@ -87,36 +87,38 @@
 </head>
 <body>
   <div class="container">
-    <h2>Editar Categorias</h2>
+    <h2>Listado de Generos</h2>
+    <h3 style="color: black;">Tenga en cuenta que si decide eliminar una categoria se eliminaran todas las peliculas que posee dicha categoria</h3>
+    <br>
+    <h3>luego de añadir una nueva categoria podra añadir peliculas a dicha categoria, para ver reflejados los cambios cargue de nuevo los xml</h3>
+    <br>
     <table>
-      <thead>
+      <tr>
+        <th>Genero</th>
+        <th></th>
+      </tr>
+        {%for elemento in lista_p%}
         <tr>
-          <th>Sala</th>
-          <th>Asientos</th>
-          <th>Opciones</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr>
-          <td></td>
-          <td></td>
+          <td>{{elemento}}</td>
           <td>
-              <a href=""
-              >
+              <a href="{{ url_for('edicion_categorias' , categoria=elemento)}}">
                 <button>Editar</button>
               </a>
-  
-            <form action="" method="POST" style="display:inline;">
-              <input type="hidden" name="sala" id="sala" value="">
+            <form action="/editar_categorias" method="POST" style="display:inline;">
+              <input type="hidden" name="categoria" id="categoria" value="{{elemento}}">
               <button type="submit">Eliminar</button>
             </form>
-  
           </td>
-        </tr>
-      </tbody>
+        {%endfor%}
+      
+      </tr>
     </table>
-    <br><br>
-    <a><button>Crear categoria</button></a>
+    <br>
+    
+    <a href="{{url_for('nueva_categoria')}}">
+      <button>Crear nueva categoria</button>
+    </a>
+    <br><br><br>
   </div>
 </body>
 <footer class="footer">
