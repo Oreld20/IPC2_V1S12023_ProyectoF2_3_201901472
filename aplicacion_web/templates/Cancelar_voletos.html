@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Voletos comprados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+
+
+    }
+
+    
+    
+    .container {
+      width: 1450px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+    }
+    
+    .container h2 {
+      text-align: center;
+    }
+    
+    .container table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .container table th,
+    .container table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .container table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    .container table tr:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .container button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .container button.edit {
+      background-color: #2196F3;
+    }
+    
+    .container button.delete {
+      background-color: #f44336;
+    }
+    
+    .container button.new {
+      background-color: #4CAF50;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Historial de voletos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Titulo</th>
+        <th>Sala</th>
+        <th>Cantidad de voleto(s)</th>
+        <th>Precio</th>
+        <th>Nombre</th>
+        <th>Nit</th>
+        <th>Direccion</th>
+        <th>Datos</th>
+        <th>Asientos</th>
+        <th>ID voleto</th>
+        <th>Cancelar Voleto</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%if lisra_vl is not none%}
+      {%for voleto in lisra_vl%}
+        <tr>
+        <td>{{voleto.titulo}}</td>
+        <td>{{voleto.sala}}</td>
+        <td>{{voleto.voleto}}</td>
+        <td>{{voleto.precio}}</td>
+        <td>{{voleto.nombre}}</td>
+        <td>{{voleto.nit}}</td>
+        <td>{{voleto.direccion}}</td>
+        <td>{{voleto.datos}}</td>
+        <td>{{voleto.asientos}}</td>
+        <td>{{voleto.No_voleto}}</td>
+        <td>
+            <form action="/cancelar_voletos", method="post">
+                <input hidden type="text" name="nombre" id="nombre" value="{{voleto.nombre}}">
+                <input hidden type="text" name="asientos" id="asientos" value="{{voleto.asientos}}">
+                <input hidden type="text" id="sala" name="sala" value="{{voleto.sala}}" >
+            <button type="submit" id="voleto" value="{{voleto.No_voleto}}" name="voleto">Cancelar</button>
+            </form>
+        </td>
+      </tr>
+      {%endfor%}
+      {%endif%}
+    </tbody>
+  </table>
+  <br><br>
+  </div>
+</body>
+<footer>
+
+    <br><br>
+    <a href="{{url_for('opciones_administrador')}}">
+      <button>Regresar al menu</button>
+    </a>
+  </footer>
+</html>

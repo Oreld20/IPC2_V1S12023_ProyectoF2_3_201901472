@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editar datos de Usuario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+    }
+    
+    .container h2 {
+      text-align: center;
+    }
+    
+    .container input[type="text"],
+    .container input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    .container button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    .container button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Actualizar datos de Usuario</h2>
+    
+    <form action="/edicion_salas" method="post">
+      {% for elemento in lista_s %}
+      {% if elemento.sala == sala %}
+
+      <label for="text">Sala:</label>
+      <input type="text" id="sala" name="sala" placeholder="{{elemento.sala}}" required>
+
+      <label for="text">Asientos:</label>
+      <input type="text" id="asientos" name="asientos" placeholder="{{elemento.asientos}}" required>
+
+      {%endif%}
+      {%endfor%}
+      <a href="{{url_for('editar_sala')}}">
+        <button type="submit" id="numero" name="numero" value="{{sala}}">Actualizar</button>
+      </a>
+    </form>
+  </div>
+</body>
+</html>

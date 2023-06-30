@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro de usuarios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+    }
+    
+    .container h2 {
+      text-align: center;
+    }
+    
+    .container input[type="text"],
+    .container input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    
+    .container button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+    
+    .container button:hover {
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Registro de usuarios</h2>
+    <form action="/nueva_tarjeta" method="post">
+
+      <label for="username">Tipo:</label>
+      <input type="text" id="tipo" name="tipo" placeholder="Ingrese el tipo de tarjeta">
+
+      <label for="username">Numero:</label>
+      <input type="text" id="numero" name="numero" placeholder="Ingrese el numero de la tarjeta">
+      
+      <label for="username">Titular:</label>
+      <input type="text" id="titular" name="titular" placeholder="Ingrese el titular de la tarjeta">
+    
+      <label for="username">Expiracion:</label>
+      <input type="text" id="expiracion" name="expiracion" placeholder="Ingrese la fecha de expiracion de la tarjeta">
+
+      <a href="{{url_for('opciones_clientes', nombre=nombre)}}">
+        <button type="submit">Guardar</button>
+      </a>
+    </form>
+  </div>
+  {%if mensaje%}
+  <p>{{mensaje}}</p>
+  {%endif%}
+</body>
+</html>
