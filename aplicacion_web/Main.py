@@ -553,6 +553,7 @@ def retorno_categorias():
     for categoria in categorias_unicas:
         print(categoria)
         return editar_categorias
+    
 
     
 
