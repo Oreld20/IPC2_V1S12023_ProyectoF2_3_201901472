@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Listado de Peliculas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+    }
+    
+    .container h2 {
+      text-align: center;
+    }
+    
+    .container table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .container table th,
+    .container table td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    
+    .container table th {
+      background-color: #4CAF50;
+      color: white;
+    }
+    
+    .container table tr:hover {
+      background-color: #f5f5f5;
+    }
+    
+    .container button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 8px 12px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    
+    .container button.edit {
+      background-color: #2196F3;
+    }
+    
+    .container button.delete {
+      background-color: #f44336;
+    }
+    
+    .container button.new {
+      background-color: #4CAF50;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form action="/listadopeliculas_cliente" method="post">
+    <h2>Listado de Peliculas</h2>
+    <table>
+      <tr>
+        <th>Genero</th>
+        <th>Titulo</th>
+        <th>Director</th>
+        <th>Año</th>
+        <th>Fecha</th>
+        <th>Imagen</th>
+        <th>Precio</th>
+        <th></th>
+      </tr>
+      {%for elemento in lista_P%}
+      <tr>
+        <td>{{elemento.categoria}}</td>
+        <td>{{elemento.titulo}}</td>
+        <td>{{elemento.director}}</td>
+        <td>{{elemento.anio}}</td>
+        <td>{{elemento.fecha}}</td>
+        <td><img src="{{elemento.imagen}}" alt="estreno" width="150px"></td>
+        <td>{{elemento.precio}}</td>
+        <input hidden type="text" id="nombre" name="nombre" value="{{nombre}}">
+        <td>
+          <a href="{{url_for('peliculas_favoritas', nombre=nombre)}}">
+            <button id="favorito" name="favorito" type="submit" value="{{elemento.titulo}}">añadir a favoritos</button>
+          </a>
+        </td>
+
+      {%endfor%}
+      </tr>
+    </table>
+    <br>
+  </form>
+      <a href="{{url_for('opciones_clientes', nombre=nombre)}}">
+        <button>Regresar al menu</button>
+      </a>
+  </div>
+</body>
+</html>
