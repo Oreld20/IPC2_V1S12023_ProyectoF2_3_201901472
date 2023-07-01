@@ -49,7 +49,7 @@ def json_usuarios():
     }
 }
 
-            
+            print(json_data)
             
             return jsonify(json_data)
 

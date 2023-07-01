@@ -105,7 +105,6 @@ def registro():
         email = request.form['email']
         password= request.form['contraseña']
         lista_clientes.nuevo_registroXML(rol,nombre,apellido, telefono, email, password)
-        lista_clientes.CargarXML(1)
         mensaje = "cliente creado con exito"
         return render_template('Register.html', mensaje=mensaje)
     return render_template('Register.html')
