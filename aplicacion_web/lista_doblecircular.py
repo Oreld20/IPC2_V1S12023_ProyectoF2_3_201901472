@@ -8,6 +8,12 @@ class ListaDoblementeEnlazadaCircular:
 
     def esta_vacia(self):
         return self.primero is None
+    
+    def esta_vacia_booleano(self):
+        if self.primero is None:
+            return False
+        else:
+            return True
 
     def insertar_inicio(self, dato):
         nuevo_nodo = Nodo(dato)

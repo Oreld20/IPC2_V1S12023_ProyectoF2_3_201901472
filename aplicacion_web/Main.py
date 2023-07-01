@@ -82,8 +82,11 @@ def login():
                     nombre = nodo_usuarios.nombre
                     return render_template('Opciones_Administrador.html')
                 elif nodo_usuarios.rol == "cliente":
-                    nombre = nodo_usuarios.nombre
-                    return render_template('Opciones_Clientes.html', nombre=nombre)
+                     nombre = nodo_usuarios.nombre
+                     return render_template('Opciones_Clientes.html', nombre=nombre)
+                else:
+                     error = "Los datos ingresados no existen en el sistema"
+                     return render_template('Login.html',lista_c = lista_clientes, error = error)
             else:
                 error = "Los datos ingresados no existen en el sistema"
                 return render_template('Login.html',lista_c = lista_clientes, error = error)
@@ -290,8 +293,15 @@ def editar_peliculas():
         lista_Peliculas.eliminar_pelicula_por_titulo(titulo)
         lista_Peliculas.CargarXML_Categorias()
         return render_template('editar_peliculas.html', lista_P=lista_Peliculas, lista_pelj = lista_peliculas_json)
-
-    return render_template('editar_peliculas.html', lista_P=lista_Peliculas, lista_pelj = lista_peliculas_json)
+    
+    if (lista_salas.esta_vacia()):
+        return render_template('editar_peliculas.html')
+    else:
+        return render_template('editar_peliculas.html', lista_P=lista_Peliculas, lista_pelj = lista_peliculas_json)
+        
+        
+        
+        
 
 @app.route('/Edicion_Peliculas', methods = ['POST','GET'])
 def Edicion_Peliculas():
@@ -533,7 +543,7 @@ def cancelar_voletos():
     
 def comprar_asientos(nombre, sala, asientos):
     asientos = asientos.split(",")
-    salas = lista_clientes.recorrer_lista_voletos_guardados(nombre)
+    salas = lista_clientes.recorrer_lista_voletos_guardados("Oreld")
     if sala in salas:
         asientos_comprados = salas[sala]
         for asiento in asientos:
@@ -548,7 +558,7 @@ def comprar_asientos(nombre, sala, asientos):
 
 def eliminar_asientos_Diccionario(nombre, sala, asientos):
     asientos = asientos.split(",")
-    salas = lista_clientes.recorrer_lista_voletos_guardados(nombre)
+    salas = lista_clientes.recorrer_lista_voletos_guardados("Oreld")
     if sala in salas:
         asientos_comprados = salas[sala]
         for asiento in asientos:

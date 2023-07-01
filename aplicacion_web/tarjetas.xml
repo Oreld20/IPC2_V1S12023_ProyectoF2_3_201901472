@@ -11,4 +11,4 @@
  <titular>Jane</titular>
  <fecha_expiracion>08/2023</fecha_expiracion>
  </tarjeta>
-</tarjetas>
+<tarjeta><tipo>Debito</tipo><numero>567890123456789</numero><titular>Oreld</titular><fecha_expiracion>15/2023</fecha_expiracion></tarjeta></tarjetas>
